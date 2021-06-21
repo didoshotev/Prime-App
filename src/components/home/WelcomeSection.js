@@ -100,7 +100,6 @@ const WelcomeSection = () => {
 
     return (
         <React.Fragment>
-            <CssBaseline />
             {/* Hero unit */}
             <Container maxWidth="sm" component="main" className={classes.heroContent}>
                 <Typography component="h1" variant="h3" align="center" color="textPrimary" gutterBottom>

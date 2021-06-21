@@ -5,19 +5,7 @@ import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
-
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Prime Hiring
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-}
+import Copyright from './core/Copyright';
 
 const useStyles = makeStyles((theme) => ({
     footer: {

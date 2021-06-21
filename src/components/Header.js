@@ -43,6 +43,10 @@ const Header = () => {
                         <Button color="inherit">Register</Button>
                     </RouterLink>
 
+                    <RouterLink to="hire">
+                        <Button color="inherit">Hire</Button>
+                    </RouterLink>
+
                     <Button color="inherit">Profile</Button>
                 </Toolbar>
             </AppBar>

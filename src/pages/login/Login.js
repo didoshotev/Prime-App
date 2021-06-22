@@ -12,8 +12,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link as RouterLink } from 'react-router-dom'
-import Copyright from '../components/core/Copyright';
+import { Link as RouterLink, useHistory } from 'react-router-dom'
+import Core from '../../components/core/Core'
+import { useState } from 'react';
+import { localUserService } from '../../services/user'
+import { useContext } from 'react';
+import UserContext from '../../Context';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,11 +41,45 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  const classes = useStyles();
+  const classes = useStyles()
+  const history = useHistory()
+  const context = useContext(UserContext)
+
+  const [inputValue, setInputValue] = useState({
+    name: '',
+    password: ''
+  })
+  const [error, setError] = useState(false)
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setInputValue((prev) => ({
+      ...prev,
+      [name]: value
+    }))
+
+  }
+
+  const handleForm = async (e) => {
+    e.preventDefault();
+    let user;
+    user = localUserService.loginUser(inputValue)
+    if (user === null) {
+      setError(true)
+      setInputValue({
+        ...inputValue,
+        name: '',
+        password: ''
+      })
+    } else {
+      context.logIn(user)
+      history.push('/')
+    }
+  }
+
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -48,17 +87,18 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleForm}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="name"
+            label="Name"
+            name="name"
+            autoComplete="name"
             autoFocus
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -69,12 +109,15 @@ const Login = () => {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            onChange={handleChange}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          {
+            error
+              ?
+              <Typography variant="h6" color="secondary">Invalid credentials</Typography>
+              :
+              null
+          }
           <Button
             type="submit"
             fullWidth
@@ -94,7 +137,7 @@ const Login = () => {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
+        <Core.Copyright />
       </Box>
     </Container>
   );

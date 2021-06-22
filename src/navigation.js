@@ -1,13 +1,12 @@
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./pages/Login"
+import Login from "./pages/login/Login"
 import RegisterPage from "./pages/register/Register"
 import HirePage from './pages/Hire'
 import Create from "./pages/create/Create";
 
 const Navigation = (props) => {
 
-    console.log(123);
     return (
         <BrowserRouter>
             <Switch>

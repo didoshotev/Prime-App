@@ -15,10 +15,12 @@ import Container from '@material-ui/core/Container';
 import { Link as RouterLink, useHistory } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
 import { useState } from 'react';
-import Copyright from '../../components/core/Copyright';
+import Core from '../../components/core/Core';
 import Header from '../../components/Header'
+
 import { technologies, nativeLanguages } from '../../utils/options'
 import { developerProfileValidator } from '../../utils/validator'
+// import { localUserService } from '../../services/user'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -76,7 +78,6 @@ const Create = () => {
             history.push('/')
         } else {
             setIsError({ error: true, field: error })
-            console.log(JSON.parse(localStorage.getItem('developers')));
         }
     }
 
@@ -272,7 +273,7 @@ const Create = () => {
                     </form>
                 </div>
                 <Box mt={5}>
-                    <Copyright />
+                    <Core.Copyright />
                 </Box>
             </Container>
         </div>

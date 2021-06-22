@@ -5,7 +5,7 @@ import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
-import Copyright from './core/Copyright';
+import Core from './core/Core'
 
 const useStyles = makeStyles((theme) => ({
     footer: {
@@ -64,7 +64,7 @@ const Footer = () => {
                 ))}
             </Grid>
             <Box mt={5}>
-                <Copyright />
+                <Core.Copyright />
             </Box>
         </Container>
     )

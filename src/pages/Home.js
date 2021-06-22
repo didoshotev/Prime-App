@@ -6,7 +6,6 @@ import UserContext from '../Context';
 
 const Home = () => {
   const context = useContext(UserContext)
-  console.log(context);
   
   return (
     <div>

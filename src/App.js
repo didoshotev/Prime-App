@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { useEffect } from "react"
 import UserContext from "./Context";
 import Navigation from "./navigation";
-import { localUserService } from "./services/user";
+import LocalService from "./services/services";
 
 const App = (props) => {
     const [state, setState] = useState({
@@ -14,7 +14,9 @@ const App = (props) => {
     })
 
     useEffect(() => {
-        localUserService.initialize()
+        console.log('INIT');
+        LocalService.user.initialize()
+        LocalService.developers.initialize()
     }, [])
 
     const logIn = (user) => {

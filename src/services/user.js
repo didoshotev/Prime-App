@@ -71,7 +71,7 @@ const localUserService = {
     },
 }
 
-export { localUserService }
+export default localUserService 
 
 // user = {
 //     id: '9213841',

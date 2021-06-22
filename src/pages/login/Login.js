@@ -18,6 +18,8 @@ import { useState } from 'react';
 import { localUserService } from '../../services/user'
 import { useContext } from 'react';
 import UserContext from '../../Context';
+import Header from '../../components/Header';
+import LocalService from '../../services/services';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +65,7 @@ const Login = () => {
   const handleForm = async (e) => {
     e.preventDefault();
     let user;
-    user = localUserService.loginUser(inputValue)
+    user = LocalService.user.loginUser(inputValue)
     if (user === null) {
       setError(true)
       setInputValue({
@@ -79,67 +81,71 @@ const Login = () => {
 
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} onSubmit={handleForm}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="name"
-            autoFocus
-            onChange={handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={handleChange}
-          />
-          {
-            error
-              ?
-              <Typography variant="h6" color="secondary">Invalid credentials</Typography>
-              :
-              null
-          }
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <RouterLink to="/register">
-                {"Don't have an account? Sign Up"}
-              </RouterLink>
+    <section>
+      <Header />
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} onSubmit={handleForm}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              onChange={handleChange}
+            />
+            {
+              error
+                ?
+                <Typography variant="h6" color="secondary">Invalid credentials</Typography>
+                :
+                null
+            }
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <RouterLink to="/register">
+                  {"Don't have an account? Sign Up"}
+                </RouterLink>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Core.Copyright />
-      </Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Core.Copyright />
+        </Box>
+      </Container>
+    </section>
+
   );
 }
 

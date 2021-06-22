@@ -15,9 +15,10 @@ import Container from '@material-ui/core/Container';
 import { Link as RouterLink, useHistory } from 'react-router-dom'
 import Core from '../../components/core/Core'
 import { useState } from 'react';
-import { localUserService } from '../../services/user'
 import { useContext } from 'react';
 import UserContext from '../../Context';
+import Header from '../../components/Header';
+import LocalService from '../../services/services';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,77 +51,81 @@ const Register = () => {
   const handleChange = (event) => {
     const { name, value } = event.target
     setInputValue((prev) => ({
-        ...prev,
-        [name]: value
+      ...prev,
+      [name]: value
     }))
-    
-}
 
-const handleForm = async (e) => {
+  }
+
+  const handleForm = async (e) => {
     e.preventDefault();
-    if(inputValue) {
-        const user = localUserService.registerUser(inputValue)
-        context.logIn(user)
-        history.push('/')
+    if (inputValue) {
+      const user = LocalService.user.registerUser(inputValue)
+      context.logIn(user)
+      history.push('/')
     }
-}
+  }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} onSubmit={handleForm}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="name"
-            autoFocus
-            onChange={handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={handleChange}
-          />
+    <section>
+      <Header />
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <form className={classes.form} onSubmit={handleForm}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              onChange={handleChange}
+            />
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <RouterLink to="/login">
-                {"Already have an account? Sign In"}
-              </RouterLink>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <RouterLink to="/login">
+                  {"Already have an account? Sign In"}
+                </RouterLink>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Core.Copyright />
-      </Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Core.Copyright />
+        </Box>
+      </Container>
+    </section>
+
   )
 }
 

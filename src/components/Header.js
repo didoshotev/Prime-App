@@ -7,9 +7,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link as RouterLink, useHistory } from 'react-router-dom'
-import { localUserService } from '../services/user';
 import { useContext } from 'react';
 import UserContext from '../Context';
+import LocalService from '../services/services';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,8 +31,9 @@ const Header = () => {
 
 
     const handleLogout = () => {
-        let currentUserID = localUserService.getUserID()
-        let isLogged = localUserService.logOut(currentUserID)
+        let currentUserID = LocalService.user.getUserID()
+        let isLogged = LocalService.user.logOut(currentUserID)
+
         if (isLogged) {
             context.logOut()
             history.push('/login')
@@ -50,11 +51,19 @@ const Header = () => {
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                        Prime Hiring
-                    </Typography>
+                    <RouterLink to="/" className={classes.title}>
+                        <Typography variant="h6">
+                            Prime Hiring
+                        </Typography>
+                    </RouterLink>
 
-                    <Button color="inherit" onClick={onHireHandler}>Hire</Button>
+                    <RouterLink to="/dashboard">
+                        <Button color="inherit">Dashboard</Button>
+                    </RouterLink>
+
+                    <RouterLink to="/create">
+                        <Button color="inherit">Create Developer</Button>
+                    </RouterLink>
 
                     <Button color="inherit">Profile</Button>
 

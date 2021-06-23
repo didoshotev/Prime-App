@@ -6,21 +6,23 @@ import Create from "./pages/create/Create";
 import DashboardPage from "./pages/dashboard/Dashboard";
 import { useContext } from "react";
 import UserContext from "./Context";
-import { Dashboard } from "@material-ui/icons";
+import DeveloperProvider from "./DeveloperProvider";
 
 const Navigation = (props) => {
     const context = useContext(UserContext)
     const { loggedIn } = context
     return (
         <BrowserRouter>
-            <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/register" component={() => !loggedIn ? <RegisterPage/> : <Home/>} />
-                <Route path="/login" component={() => !loggedIn ? <Login/> : <Home/>} />
-                <Route path="/dashboard" component={() => loggedIn ? <DashboardPage/> : <Login/>} />
-                <Route path="/create" component={() => loggedIn ? <Create/> : <Login/>} />
+            <DeveloperProvider>
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/register" component={() => !loggedIn ? <RegisterPage /> : <Home />} />
+                    <Route path="/login" component={() => !loggedIn ? <Login /> : <Home />} />
+                    <Route path="/dashboard" component={() => loggedIn ? <DashboardPage /> : <Login />} />
+                    <Route path="/create" component={() => loggedIn ? <Create /> : <Login />} />
 
-            </Switch>
+                </Switch>
+            </DeveloperProvider>
         </BrowserRouter>
     )
 }

@@ -7,7 +7,7 @@ const UserContext = React.createContext({
     logIn: () => {},
     logOut: () => {},
     hiredDevelopers: [],
-    hireDeveloper: () => {},
+    hireDevelopers: () => {},
 })
 
 export default UserContext

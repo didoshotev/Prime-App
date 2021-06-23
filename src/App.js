@@ -10,7 +10,7 @@ const App = (props) => {
     const [state, setState] = useState({
         loggedIn: false,
         user: null,
-        hiredDevelopers: [],
+        hiredDevelopers: [], //{ name: Example, id: 0.111, startDate, endDate }
     })
 
     useEffect(() => {
@@ -35,6 +35,13 @@ const App = (props) => {
         })
     }
 
+    const hireDevelopers = (developers) => { // arr
+        const newDevs = [...state.hiredDevelopers, developers]
+        setState({
+            ...state,
+            hiredDevelopers: newDevs 
+        })
+    }
 
     const { loggedIn, user, hiredDevelopers } = state
     return (
@@ -44,7 +51,8 @@ const App = (props) => {
                 logIn,
                 logOut,
                 user,
-                hiredDevelopers
+                hiredDevelopers,
+                hireDevelopers
             }}>
                 { props.children }
                 <Navigation />

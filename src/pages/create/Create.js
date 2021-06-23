@@ -21,6 +21,8 @@ import Header from '../../components/Header'
 import { technologies, nativeLanguages } from '../../utils/options'
 import { developerProfileValidator } from '../../utils/validator'
 import LocalService from '../../services/services';
+import { useContext } from 'react';
+import DeveloperContext from '../../DeveloperContext';
 // import { localUserService } from '../../services/user'
 
 const useStyles = makeStyles((theme) => ({
@@ -57,6 +59,7 @@ const Create = () => {
     })
     const [isError, setIsError] = useState({ error: false, field: "" });
     const history = useHistory()
+    const developerContext = useContext(DeveloperContext)
 
     const { technology, language } = inputValue;
 
@@ -72,10 +75,8 @@ const Create = () => {
         e.preventDefault();
         const error = developerProfileValidator(inputValue)
         if (error === false) {
-            // let currentData = JSON.parse(localStorage.getItem('developers'));
-            // currentData.push(inputValue);
-            // localStorage.setItem('developers', JSON.stringify(currentData))
             LocalService.developers.add(inputValue)
+            // developerContext.addDeveloper(inputValue)
             history.push('/')
         } else {
             setIsError({ error: true, field: error })

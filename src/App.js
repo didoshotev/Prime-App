@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { useContext } from "react";
 import { useEffect } from "react"
 import UserContext from "./Context";
 import Navigation from "./navigation";

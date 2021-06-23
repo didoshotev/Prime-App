@@ -6,14 +6,12 @@ import Create from "./pages/create/Create";
 import DashboardPage from "./pages/dashboard/Dashboard";
 import { useContext } from "react";
 import UserContext from "./Context";
-import DeveloperProvider from "./DeveloperProvider";
 
 const Navigation = (props) => {
     const context = useContext(UserContext)
     const { loggedIn } = context
     return (
         <BrowserRouter>
-            <DeveloperProvider>
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/register" component={() => !loggedIn ? <RegisterPage /> : <Home />} />
@@ -22,7 +20,6 @@ const Navigation = (props) => {
                     <Route path="/create" component={() => loggedIn ? <Create /> : <Login />} />
 
                 </Switch>
-            </DeveloperProvider>
         </BrowserRouter>
     )
 }

@@ -8,16 +8,13 @@ import { useState } from "react"
 import LocalService from "../../services/services"
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { useContext } from "react"
-import DeveloperContext from "../../DeveloperContext"
 
 const Dashboard = () => {
     const [developers, setDevelopers] = useState([])
     const checkBoxes = []
-    const developerContext = useContext(DeveloperContext)
 
     useEffect(() => {
-        // let devs = developerContext.developers
+        
         let devs = LocalService.developers.getMany();
         setDevelopers(devs)
     }, [])
@@ -25,8 +22,6 @@ const Dashboard = () => {
     developers.map(item => {
         checkBoxes.push({ name: item.name, checked: false, id: item.id })
     })
-
-    
 
     return (
         <section>

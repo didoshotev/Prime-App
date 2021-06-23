@@ -1,11 +1,7 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import CodeIcon from '@material-ui/icons/Code';
@@ -21,9 +17,8 @@ import Header from '../../components/Header'
 import { technologies, nativeLanguages } from '../../utils/options'
 import { developerProfileValidator } from '../../utils/validator'
 import LocalService from '../../services/services';
-import { useContext } from 'react';
-import DeveloperContext from '../../DeveloperContext';
-// import { localUserService } from '../../services/user'
+
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -59,7 +54,6 @@ const Create = () => {
     })
     const [isError, setIsError] = useState({ error: false, field: "" });
     const history = useHistory()
-    const developerContext = useContext(DeveloperContext)
 
     const { technology, language } = inputValue;
 
@@ -71,12 +65,11 @@ const Create = () => {
         }));
     };
 
-    const handleForm = async (e) => {
+    const handleForm = (e) => {
         e.preventDefault();
         const error = developerProfileValidator(inputValue)
         if (error === false) {
             LocalService.developers.add(inputValue)
-            // developerContext.addDeveloper(inputValue)
             history.push('/')
         } else {
             setIsError({ error: true, field: error })

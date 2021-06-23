@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -9,10 +9,7 @@ import { DatePicker } from '@material-ui/pickers'
 import { Box, Checkbox, FormControlLabel } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import UserContext from '../../../Context';
-import DeveloperContext from '../../../DeveloperContext';
 import LocalService from '../../../services/services';
-import { DateRangeSharp } from '@material-ui/icons';
 
 const HireDialog = ({ developers, checkBoxes }) => {
     const [open, setOpen] = useState(false);
@@ -24,10 +21,7 @@ const HireDialog = ({ developers, checkBoxes }) => {
 
     const [isTimeSelected, setIsTimeSelected] = useState(false)
     const [freeDevelopersAtTime, setFreeDevelopersAtTime] = useState([])
-
-    const context = useContext(UserContext)
-    const developerContext = useContext(DeveloperContext)
-
+    
     useEffect(() => {
         setBoxes({
             ...boxes,
@@ -47,20 +41,14 @@ const HireDialog = ({ developers, checkBoxes }) => {
                 newDevelopers.push({
                     name: dev.name,
                     id: dev.id,
-                    // startDate: (selectedStartDate.toLocaleDateString()).slice(0, -3),
-                    // endDate: (selectedEndDate.toLocaleDateString()).slice(0, -3)
                 })
             })
         // let startDate = (selectedStartDate.toLocaleDateString()).slice(0, -3);
         // let endDate = (selectedEndDate.toLocaleDateString()).slice(0, -3);
-
         let start = selectedStartDate.toUTCString();
         let end = selectedEndDate.toUTCString();
-      
-        LocalService.developers.addToSchedule(newDevelopers, start, end);
 
-        // developerContext.hireDevelopers(newDevelopers)
-        // context.hireDevelopers(newDevelopers)
+        LocalService.developers.addToSchedule(newDevelopers, start, end);
         setOpen(false);
     };
 
@@ -75,8 +63,6 @@ const HireDialog = ({ developers, checkBoxes }) => {
         if (checkboxes === undefined) {
             return <p>Loading...</p>
         } else {
-            // console.log(boxes);
-            // console.log(freeDevelopersAtTime);
             return (
                 checkboxes.map((checkbox, index) => {
                     if (freeDevelopersAtTime.includes(checkbox.id)) {
@@ -89,7 +75,6 @@ const HireDialog = ({ developers, checkBoxes }) => {
                             />
                         )
                     }
-
                 }
                 )
             )
@@ -99,10 +84,6 @@ const HireDialog = ({ developers, checkBoxes }) => {
 
     const handleEndDateSelect = (date) => {
         setSelectedEndDate(date)
-        // let start = selectedStartDate.toUTCString()
-        // let end = selectedEndDate.toUTCString()
-        // let freeDevsArr = LocalService.developers.checkSchedule(start, end)
-        // setFreeDevelopersAtTime(freeDevsArr)
     }
 
     const handeTimeSelect = () => {
@@ -111,7 +92,6 @@ const HireDialog = ({ developers, checkBoxes }) => {
         let freeDevsArr = LocalService.developers.checkSchedule(start, end)
         setFreeDevelopersAtTime(freeDevsArr)
         setIsTimeSelected(true)
-       
     }
 
     return (

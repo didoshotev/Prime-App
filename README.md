@@ -5,12 +5,12 @@
 3. Your app should be running on [http://localhost:3000](http://localhost:3000).
 
 ### App specefication
-Front End only application which is using React along with [Material-UI](https://material-ui.com/) for styiling.
-User auhtentication,
-Create, Read, Edit, Delete developers
-Hiring developers for specefic time
+Front End only application which is using React along with [Material-UI](https://material-ui.com/) for styiling.__
+User auhtentication______
+Create, Read, Edit, Delete developers____
+Hiring developers for specefic time__
 
-note: LocalStorage and React Context are used as DB so any refresh on the browser will lead the app to lose the context thus its data across the app.
+note: LocalStorage and React Context are used as DB so any refresh on the browser will lead the app to lose the context thus its data across the app.__
 If you want to use the application with real database just simply change Local Storage service with your Rest API (or other) and the app should be running as it is now.
 
 

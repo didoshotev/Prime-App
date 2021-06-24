@@ -8,11 +8,11 @@ const developerProfileValidator = (data) => {
         errorField = 'phone'
     } else if (!data.location || data.location === "") {
         errorField = 'location'
-    } else if (!data.salary || data.salary === "") {
+    } else if (!data.salary || data.salary === "" || +data.salary < 0) {
         errorField = 'salary'
     } else if (!data.technology || data.technology === "") {
         errorField = 'technology'
-    } else if (!data.experience || data.experience === "") {
+    } else if (!data.experience || data.experience === "" || +data.experience < 0) {
         errorField = 'experience'
     } else if (!data.language || data.language === "") {
         errorField = 'language'

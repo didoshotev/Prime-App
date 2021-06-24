@@ -87,6 +87,24 @@ const GridItem = (props) => {
                             {props.email}
                         </Typography>
                     </Box>
+
+                    <Box display="flex" justifyContent="space-between" flexWrap="wrap">
+                        <Typography variant="body2" color="textPrimary" component="p">
+                            LinkedIn:
+                        </Typography>
+                        <Typography variant="body1" color="textPrimary" component="p">
+                            {props.linkedin ? props.linkedin : 'not provided'}
+                        </Typography>
+                    </Box>
+
+                    <Box display="flex" justifyContent="space-between" flexWrap="wrap">
+                        <Typography variant="body2" color="textPrimary" component="p">
+                            Description:
+                        </Typography>
+                        <Typography variant="body1" color="textPrimary" component="p">
+                            {props.description ? props.description : 'not provided'}
+                        </Typography>
+                    </Box>
                     
                 </CardContent>
             </CardActionArea>

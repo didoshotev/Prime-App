@@ -9,11 +9,10 @@ const App = (props) => {
     const [state, setState] = useState({
         loggedIn: false,
         user: null,
-        hiredDevelopers: [], //{ name: Example, id: 0.111, startDate, endDate }
     })
 
     useEffect(() => {
-        console.log('INIT');
+        console.log('INIT APP');
         LocalService.user.initialize()
         LocalService.developers.initialize()
     }, [])
@@ -34,15 +33,7 @@ const App = (props) => {
         })
     }
 
-    const hireDevelopers = (developers) => { // arr
-        const newDevs = [...state.hiredDevelopers, developers]
-        setState({
-            ...state,
-            hiredDevelopers: newDevs 
-        })
-    }
-
-    const { loggedIn, user, hiredDevelopers } = state
+    const { loggedIn, user } = state
     return (
         <>
             <UserContext.Provider value={{
@@ -50,8 +41,6 @@ const App = (props) => {
                 logIn,
                 logOut,
                 user,
-                hiredDevelopers,
-                hireDevelopers
             }}>
                 { props.children }
                 <Navigation />

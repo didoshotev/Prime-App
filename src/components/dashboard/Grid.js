@@ -5,7 +5,6 @@ const Grid = (props) => {
 
     return (
         <MUIGrid container spacing={2} alignItems={'center'}>
-            {/* {renderGrid()} */}
             { props.children }
         </MUIGrid>
     );

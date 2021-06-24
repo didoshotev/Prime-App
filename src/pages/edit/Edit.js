@@ -8,11 +8,10 @@ import CodeIcon from '@material-ui/icons/Code';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
 import { useState } from 'react';
 import Core from '../../components/core/Core';
-import Header from '../../components/Header'
 
 import { technologies, nativeLanguages } from '../../utils/options'
 import { developerProfileValidator } from '../../utils/validator'
@@ -227,7 +226,7 @@ const Edit = () => {
                                 />
                             </Grid>
 
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12}>
                                 <TextField
                                     id="description"
                                     label="Description"

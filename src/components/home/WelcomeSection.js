@@ -4,14 +4,13 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import StarIcon from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Footer from '../Footer';
-
+import { Link } from 'react-router-dom'
+import {Box} from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -73,10 +72,10 @@ const tiers = [
         subheader: 'Most popular',
         price: '50',
         description: [
-            '20 users included',
-            '10 GB of storage',
-            'Help center access',
-            'Priority email support',
+            'Code quality control',
+            'Managing resources',
+            'Resolving conflicts',
+            'Conducting team meetings',
         ],
         buttonText: 'More information',
         buttonVariant: 'contained',
@@ -100,7 +99,6 @@ const WelcomeSection = () => {
 
     return (
         <React.Fragment>
-            {/* Hero unit */}
             <Container maxWidth="sm" component="main" className={classes.heroContent}>
                 <Typography component="h1" variant="h3" align="center" color="textPrimary" gutterBottom>
                     Looking for a Developer?
@@ -110,11 +108,9 @@ const WelcomeSection = () => {
                     at different levels starting from Interns to Team Leads.
                 </Typography>
             </Container>
-            {/* End hero unit */}
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
                     {tiers.map((tier) => (
-                        // Enterprise card is full width at sm breakpoint
                         <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
                             <Card>
                                 <CardHeader
@@ -131,7 +127,7 @@ const WelcomeSection = () => {
                                             ${tier.price}
                                         </Typography>
                                         <Typography variant="h6" color="textSecondary">
-                                            /h
+                                            /hour
                                         </Typography>
                                     </div>
                                     <ul>
@@ -143,9 +139,14 @@ const WelcomeSection = () => {
                                     </ul>
                                 </CardContent>
                                 <CardActions>
-                                    <Button fullWidth variant={tier.buttonVariant} color="primary">
-                                        {tier.buttonText}
-                                    </Button>
+                                    <Box width="100%">
+                                        <Link to="/dashboard">
+                                            <Button fullWidth variant={tier.buttonVariant} color="primary">
+                                                {tier.buttonText}
+                                            </Button>
+                                        </Link>
+                                    </Box>
+
                                 </CardActions>
                             </Card>
                         </Grid>

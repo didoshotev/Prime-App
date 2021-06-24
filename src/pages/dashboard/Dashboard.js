@@ -1,7 +1,4 @@
-import { TextField, Container, Box, Typography } from "@material-ui/core"
-import Footer from "../../components/Footer"
-import Header from "../../components/Header"
-
+import { Container, Box, Typography } from "@material-ui/core"
 import HireDialog from "../../components/dashboard/hire-dialog/HireDialog"
 import { useEffect } from "react"
 import { useState } from "react"

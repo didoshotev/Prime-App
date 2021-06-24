@@ -1,8 +1,8 @@
 const localDevelopersService = {
     initialize() {
         const developers = []
-        const developersSchedule = []  // [{id: 0.34343, busyDays: [ {startDate: '12.01.2021', endDate: '25.01.2021'}, ] }]
-        localStorage.setItem('developers', JSON.stringify(developers))  //{startDate: '01.01.2021', endDate: '05.01.2021'}
+        const developersSchedule = []   // [{id: 0.34343, busyDays: [ {startDate: '12.01.2021', endDate: '25.01.2021'}, ] }]
+        localStorage.setItem('developers', JSON.stringify(developers))  
         localStorage.setItem('developersSchedule', JSON.stringify(developersSchedule))
     },
     add(item) {
@@ -69,7 +69,7 @@ const localDevelopersService = {
         const developers = JSON.parse(localStorage.getItem('developers'))
         const newDevelopers = developers.filter((item) => item.id !== itemID)
         localStorage.setItem('developers', JSON.stringify(newDevelopers))
-        
+
         const developersSchedule = JSON.parse(localStorage.getItem('developersSchedule'))
         const newDevelopersSchedule = developersSchedule.filter((item) => item.id !== itemID)
         localStorage.setItem('developersSchedule', JSON.stringify(newDevelopersSchedule))
@@ -84,7 +84,7 @@ const localDevelopersService = {
         const developersSchedule = JSON.parse(localStorage.getItem('developersSchedule'))
         const currSchedulerIndex = developersSchedule.findIndex((dev) => dev.id === newDeveloperData.id)
         const currDevSchedule = developersSchedule.find((dev) => dev.id === newDeveloperData.id)
-        const modifiedDevSchedule = {...currDevSchedule, name: newDeveloperData.name}
+        const modifiedDevSchedule = { ...currDevSchedule, name: newDeveloperData.name }
         developersSchedule.splice(currSchedulerIndex, 1, modifiedDevSchedule)
         localStorage.setItem('developersSchedule', JSON.stringify(developersSchedule))
     },
@@ -100,13 +100,27 @@ const localDevelopersService = {
 
     getManyByIDsArr(selectedDevs) {
         const developers = JSON.parse(localStorage.getItem('developers'))
+        const developersSchedule = JSON.parse(localStorage.getItem('developersSchedule'))
+
         let coppiedDevelopers = [...developers]
         let filteredDevelopers = []
         selectedDevs.forEach((selectedDev, index) => {
             coppiedDevelopers.forEach(dev => {
+                let duplicateCheck = false
                 if (selectedDev.id === dev.id) {
-                    filteredDevelopers.push(dev)
-                    coppiedDevelopers.splice(index, 1)
+                    let devSchedule = developersSchedule.find(item => item.id === dev.id)
+                    let newItem = Object.assign(dev, ...devSchedule.busyDays)
+
+                    filteredDevelopers.forEach(item => {
+                        if (item.id === newItem.id) {
+                            duplicateCheck = true
+                        }
+                    })
+                    if (!duplicateCheck) {
+                        filteredDevelopers.push(newItem)
+                        coppiedDevelopers.splice(index, 1)
+                    }
+
                 }
             })
         })

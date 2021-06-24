@@ -8,8 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link as RouterLink, useHistory } from 'react-router-dom'
 import { useContext } from 'react';
-import UserContext from '../Context';
-import LocalService from '../services/services';
+import UserContext from '../../Context';
+import LocalService from '../../services/services';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,39 +40,33 @@ const Header = () => {
         }
     }
 
-    const onHireHandler = () => {
-        loggedIn ? history.push('/hire') : history.push('/login')
-    }
-
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
                     <RouterLink to="/" className={classes.title}>
                         <Typography variant="h6">
                             Prime Hiring
                         </Typography>
                     </RouterLink>
 
-                    <RouterLink to="/dashboard">
-                        <Button color="inherit">Dashboard</Button>
-                    </RouterLink>
-
-                    <RouterLink to="/create">
-                        <Button color="inherit">Create Developer</Button>
-                    </RouterLink>
-
-                    <RouterLink to="/profile">
-                        <Button color="inherit">Profile</Button>
-                    </RouterLink>
-
                     {
                         loggedIn
                             ?
-                            <Button color="inherit" onClick={handleLogout}>Logout</Button>
+                            <>
+                                <RouterLink to="/dashboard">
+                                    <Button color="inherit">Dashboard</Button>
+                                </RouterLink>
+
+                                <RouterLink to="/create">
+                                    <Button color="inherit">Create Developer</Button>
+                                </RouterLink>
+
+                                <RouterLink to="/profile">
+                                    <Button color="inherit">Profile</Button>
+                                </RouterLink>
+                                <Button color="inherit" onClick={handleLogout}>Logout</Button>
+                            </>
                             :
                             <>
                                 <RouterLink to="login">

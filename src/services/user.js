@@ -15,7 +15,7 @@ const localUserService = {
 
     loginUser(user) {
         const users = JSON.parse(localStorage.getItem('users'))
-        let currentUser = users.find(u => u.name === user.name || u.password === user.password)
+        let currentUser = users.find(u => u.name === user.name && u.password === user.password)
         if (currentUser === undefined) {
             return null
         }

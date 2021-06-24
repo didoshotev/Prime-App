@@ -36,34 +36,43 @@ const Profile = () => {
   return (
     <Container maxWidth="lg">
       <Box margin="20px 0 30px 0">
-        <Typography variant="h6" align="center">Hired Developers</Typography>
+        <Typography variant="h5" align="center">Hired Developers</Typography>
       </Box>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Email</TableCell>
-              <TableCell align="right">Skill</TableCell>
-              <TableCell align="right">Experience</TableCell>
-              <TableCell align="right">LinkedIn</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {hiredDevs.map((dev) => (
-              <TableRow key={dev.name}>
-                <TableCell component="th" scope="row">
-                  {dev.name}
-                </TableCell>
-                <TableCell align="right">{dev.email}</TableCell>
-                <TableCell align="right">{dev.technology}</TableCell>
-                <TableCell align="right">{dev.experience} years</TableCell>
-                <TableCell align="right">{dev.linkedin ? dev.linkedin : 'not provided'}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {
+        hiredDevs.length == 0
+          ?
+          <div>
+            <Typography variant="h6">You haven't hired any developers yet</Typography>
+          </div>
+          :
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell align="right">Email</TableCell>
+                  <TableCell align="right">Skill</TableCell>
+                  <TableCell align="right">Experience</TableCell>
+                  <TableCell align="right">Busy until</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {hiredDevs.map((dev) => (
+                  <TableRow key={dev.id}>
+                    <TableCell component="th" scope="row">
+                      {dev.name}
+                    </TableCell>
+                    <TableCell align="right">{dev.email}</TableCell>
+                    <TableCell align="right">{dev.technology}</TableCell>
+                    <TableCell align="right">{dev.experience} years</TableCell>
+                    <TableCell align="right">{(dev.endDate).slice(dev.endDate.lenth, 12)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+      }
+
     </Container>
   );
 }

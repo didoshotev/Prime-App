@@ -13,7 +13,6 @@ import Core from '../../components/core/Core'
 import { useState } from 'react';
 import { useContext } from 'react';
 import UserContext from '../../Context';
-import Header from '../../components/Header';
 import LocalService from '../../services/services';
 
 
@@ -96,6 +95,7 @@ const Login = () => {
               autoComplete="name"
               autoFocus
               onChange={handleChange}
+              value={inputValue.name}
             />
             <TextField
               variant="outlined"
@@ -107,6 +107,7 @@ const Login = () => {
               type="password"
               id="password"
               onChange={handleChange}
+              value={inputValue.password}
             />
             {
               error

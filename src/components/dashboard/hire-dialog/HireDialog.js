@@ -10,18 +10,20 @@ import { Box, Checkbox, FormControlLabel } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import LocalService from '../../../services/services';
+import { useHistory } from 'react-router-dom';
 
 const HireDialog = ({ developers, checkBoxes }) => {
     const [open, setOpen] = useState(false);
     const [boxes, setBoxes] = useState({
         checkboxes: checkBoxes
     })
-    const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+    const [selectedStartDate, setSelectedStartDate] = useState(new Date(2000, 1, 1));
     const [selectedEndDate, setSelectedEndDate] = useState(new Date());
 
     const [isTimeSelected, setIsTimeSelected] = useState(false)
     const [freeDevelopersAtTime, setFreeDevelopersAtTime] = useState([])
-    
+    const history = useHistory()
+
     useEffect(() => {
         setBoxes({
             ...boxes,
@@ -43,15 +45,15 @@ const HireDialog = ({ developers, checkBoxes }) => {
                     id: dev.id,
                 })
             })
-        // let startDate = (selectedStartDate.toLocaleDateString()).slice(0, -3);
-        // let endDate = (selectedEndDate.toLocaleDateString()).slice(0, -3);
+        //(selectedEndDate.toLocaleDateString()).slice(0, -3);
         let start = selectedStartDate.toUTCString();
         let end = selectedEndDate.toUTCString();
 
         try {
             LocalService.developers.addToSchedule(newDevelopers, start, end);
             LocalService.user.hireManyDevelopers(newDevelopers)
-        } catch(err) {
+            history.push('/')
+        } catch (err) {
             console.error(`error at hiring user`, err);
         }
 
@@ -69,6 +71,9 @@ const HireDialog = ({ developers, checkBoxes }) => {
         if (checkboxes === undefined) {
             return <p>Loading...</p>
         } else {
+            if (freeDevelopersAtTime.length == 0) {
+                return <div>No free developers at this time</div>
+            }
             return (
                 checkboxes.map((checkbox, index) => {
                     if (freeDevelopersAtTime.includes(checkbox.id)) {
@@ -102,9 +107,11 @@ const HireDialog = ({ developers, checkBoxes }) => {
 
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                Hire Developers
-            </Button>
+            <Box display="flex">
+                <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                    Hire Developers
+                </Button>
+            </Box>
             <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Hire Developers</DialogTitle>
 

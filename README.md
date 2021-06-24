@@ -2,7 +2,7 @@
 ### Steps in order to start the app:
 1. Run the command `npm install` at ROOT level after you have already cloned the repo.
 2. Simply run `npm start` at root level after node_modules has been successfully downloaded
-3. Your app should be running on [http://localhost:3000].
+3. Your app should be running on [http://localhost:3000](http://localhost:3000).
 
 ### App specefication
 Front End only application which is using React along with [Material-UI](https://material-ui.com/) for styiling.

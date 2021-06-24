@@ -6,6 +6,7 @@ import Create from "./pages/create/Create";
 import DashboardPage from "./pages/dashboard/Dashboard";
 import { useContext } from "react";
 import UserContext from "./Context";
+import Edit from "./pages/edit/Edit";
 
 const Navigation = (props) => {
     const context = useContext(UserContext)
@@ -18,6 +19,7 @@ const Navigation = (props) => {
                     <Route path="/login" component={() => !loggedIn ? <Login /> : <Home />} />
                     <Route path="/dashboard" component={() => loggedIn ? <DashboardPage /> : <Login />} />
                     <Route path="/create" component={() => loggedIn ? <Create /> : <Login />} />
+                    <Route path="/edit" component={() => loggedIn ? <Edit /> : <Login />} />
 
                 </Switch>
         </BrowserRouter>

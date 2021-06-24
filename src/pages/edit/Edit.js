@@ -8,7 +8,7 @@ import CodeIcon from '@material-ui/icons/Code';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link as RouterLink, useHistory } from 'react-router-dom'
+import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
 import { useState } from 'react';
 import Core from '../../components/core/Core';
@@ -34,22 +34,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Create = (props) => {
+const Edit = () => {
+    const location = useLocation()
+    
     const classes = useStyles();
-    const [inputValue, setInputValue] = useState({
-        name: '',
-        email: '',
-        location: '',
-        salary: '',
-        experience: '',
-        language: '',
-        linkedin: '',
-        description: '',
-        technology: '',
-        profilePicture: '',
-        phone: ''
-
-    })
+    const [inputValue, setInputValue] = useState({ ...location.state.item})
     const [isError, setIsError] = useState({ error: false, field: "" });
     const history = useHistory()
 
@@ -67,7 +56,7 @@ const Create = (props) => {
         e.preventDefault();
         const error = developerProfileValidator(inputValue)
         if (error === false) {
-            LocalService.developers.add(inputValue)
+            LocalService.developers.edit(inputValue)
             history.push('/')
         } else {
             setIsError({ error: true, field: error })
@@ -83,7 +72,7 @@ const Create = (props) => {
                         <CodeIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Create Developer Profile
+                        Editing Profile
                     </Typography>
                     <form className={classes.form} noValidate onSubmit={handleForm}>
                         <Grid container spacing={2}>
@@ -98,6 +87,7 @@ const Create = (props) => {
                                     autoComplete="name"
                                     onChange={handleChange}
                                     error
+                                    defaultValue={inputValue.name}
                                 />
                             </Grid>
 
@@ -111,6 +101,7 @@ const Create = (props) => {
                                     name="email"
                                     autoComplete="email"
                                     onChange={handleChange}
+                                    defaultValue={inputValue.email}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -122,8 +113,9 @@ const Create = (props) => {
                                     label="Phone number"
                                     type="phone"
                                     id="phone"
-                                    autoComplete="current-password"
+                                    autoComplete="phone"
                                     onChange={handleChange}
+                                    defaultValue={inputValue.phone}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -136,6 +128,7 @@ const Create = (props) => {
                                     name="location"
                                     autoComplete="location"
                                     onChange={handleChange}
+                                    defaultValue={inputValue.location}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -151,6 +144,7 @@ const Create = (props) => {
                                         shrink: true,
                                     }}
                                     onChange={handleChange}
+                                    defaultValue={inputValue.salary}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -164,6 +158,7 @@ const Create = (props) => {
                                     value={technology}
                                     name="technology"
                                     onChange={handleChange}
+                                    defaultValue={inputValue.technology}
                                 >
                                     {technologies.map((option) => (
                                         <MenuItem key={option.value} value={option.value}>
@@ -185,6 +180,7 @@ const Create = (props) => {
                                         shrink: true,
                                     }}
                                     onChange={handleChange}
+                                    defaultValue={inputValue.experience}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -198,6 +194,7 @@ const Create = (props) => {
                                     name="language"
                                     value={language}
                                     onChange={handleChange}
+                                    defaultValue={inputValue.language}
                                 >
                                     {nativeLanguages.map((option) => (
                                         <MenuItem key={option.value} value={option.value}>
@@ -216,6 +213,7 @@ const Create = (props) => {
                                     label="Linkedin link"
                                     autoFocus
                                     onChange={handleChange}
+                                    defaultValue={inputValue.linkedin}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -226,6 +224,7 @@ const Create = (props) => {
                                     variant="outlined"
                                     name="profilePicture"
                                     onChange={handleChange}
+                                    defaultValue={inputValue.profilePicture}
                                 />
                             </Grid>
 
@@ -239,6 +238,7 @@ const Create = (props) => {
                                     variant="outlined"
                                     name="description"
                                     onChange={handleChange}
+                                    defaultValue={inputValue.description}
                                 />
                             </Grid>
                         </Grid>
@@ -259,10 +259,8 @@ const Create = (props) => {
                             color="primary"
                             className={classes.submit}
                         >
-
                             Confirm
                         </Button>
-
                     </form>
                 </div>
                 <Box mt={5}>
@@ -275,4 +273,4 @@ const Create = (props) => {
     )
 }
 
-export default Create
+export default Edit

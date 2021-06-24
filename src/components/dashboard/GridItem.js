@@ -91,9 +91,14 @@ const GridItem = (props) => {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
-                    Hire
+                <Button size="small" color="secondary" variant="outlined" onClick={(e) => props.handleDelete(props.id)}>
+                    Delete
                 </Button>
+
+                <Button size="small" color="secondary" variant="outlined" onClick={(e) => props.handleEdit(props.id)}>
+                    Edit
+                </Button>
+
             </CardActions>
         </Card>
     );

@@ -178,12 +178,6 @@ const HireDialog = ({ developers, checkBoxes }) => {
 
                         </DialogContent>
                 }
-
-                {/* boxes.checkboxes.length === 0 */}
-
-
-
-
             </Dialog>
         </div>
     );

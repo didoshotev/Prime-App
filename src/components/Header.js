@@ -65,7 +65,9 @@ const Header = () => {
                         <Button color="inherit">Create Developer</Button>
                     </RouterLink>
 
-                    <Button color="inherit">Profile</Button>
+                    <RouterLink to="/profile">
+                        <Button color="inherit">Profile</Button>
+                    </RouterLink>
 
                     {
                         loggedIn

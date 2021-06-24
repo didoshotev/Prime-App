@@ -48,7 +48,13 @@ const HireDialog = ({ developers, checkBoxes }) => {
         let start = selectedStartDate.toUTCString();
         let end = selectedEndDate.toUTCString();
 
-        LocalService.developers.addToSchedule(newDevelopers, start, end);
+        try {
+            LocalService.developers.addToSchedule(newDevelopers, start, end);
+            LocalService.user.hireManyDevelopers(newDevelopers)
+        } catch(err) {
+            console.error(`error at hiring user`, err);
+        }
+
         setOpen(false);
     };
 

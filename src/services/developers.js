@@ -98,6 +98,21 @@ const localDevelopersService = {
         return developers.find(dev => dev.id === id)
     },
 
+    getManyByIDsArr(selectedDevs) {
+        const developers = JSON.parse(localStorage.getItem('developers'))
+        let coppiedDevelopers = [...developers]
+        let filteredDevelopers = []
+        selectedDevs.forEach((selectedDev, index) => {
+            coppiedDevelopers.forEach(dev => {
+                if (selectedDev.id === dev.id) {
+                    filteredDevelopers.push(dev)
+                    coppiedDevelopers.splice(index, 1)
+                }
+            })
+        })
+        return filteredDevelopers
+    },
+
     clear() {
         localStorage.clear()
     },

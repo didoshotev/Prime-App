@@ -41,7 +41,6 @@ const Dashboard = () => {
     return (
         <section>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Header />
                 <Container maxWidth="lg">
                     <Box textAlign="center" paddingTop={'20px'} paddingBottom={'20px'}>
                         <Typography variant="h4">Our Developers</Typography>
@@ -66,7 +65,6 @@ const Dashboard = () => {
                         }
                     </Grid>
                 </Container>
-                <Footer />
             </MuiPickersUtilsProvider>
         </section>
 

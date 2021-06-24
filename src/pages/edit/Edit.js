@@ -65,7 +65,6 @@ const Edit = () => {
 
     return (
         <div>
-            <Header />
             <Container component="main" maxWidth="md">
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>

@@ -152,9 +152,6 @@ const WelcomeSection = () => {
                     ))}
                 </Grid>
             </Container>
-            {/* Footer */}
-            <Footer />
-            {/* End footer */}
         </React.Fragment>
     );
 }

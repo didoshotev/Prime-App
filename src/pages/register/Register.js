@@ -68,7 +68,6 @@ const Register = () => {
 
   return (
     <section>
-      <Header />
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>

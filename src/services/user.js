@@ -6,7 +6,7 @@ const localUserService = {
     },
 
     registerUser(inputValues) {
-        const newUser = {...inputValues, hiredDevelopers: [], id: Math.random(9999), loggedIn: true}
+        const newUser = { ...inputValues, hiredDevelopers: [], id: Math.random(9999), loggedIn: true }
         const users = JSON.parse(localStorage.getItem('users'))
         users.push(newUser)
         localStorage.setItem('users', JSON.stringify(users))
@@ -20,8 +20,8 @@ const localUserService = {
             return null
         }
         let index = users.findIndex(user => user.id === currentUser.id)
-        currentUser = {...currentUser, loggedIn: true}
-        
+        currentUser = { ...currentUser, loggedIn: true }
+
         users.splice(index, 1, currentUser)
         localStorage.setItem('users', JSON.stringify(users))
         return currentUser
@@ -31,19 +31,19 @@ const localUserService = {
         const users = JSON.parse(localStorage.getItem('users'))
         let currentUser = users.find(user => user.id === currentUserID)
         let index = users.findIndex(user => user.id === currentUserID)
-        currentUser = {...currentUser, loggedIn: false}
-        if(currentUser === undefined) {
-            return false 
+        currentUser = { ...currentUser, loggedIn: false }
+        if (currentUser === undefined) {
+            return false
         }
         users.splice(index, 1, currentUser)
         localStorage.setItem('users', JSON.stringify(users))
-         return true   
+        return true
     },
 
     getUserID() {
         const users = JSON.parse(localStorage.getItem('users'))
         const currentUser = users.find(user => user.loggedIn === true)
-        if(currentUser === undefined) {
+        if (currentUser === undefined) {
             return null
         }
         return currentUser.id
@@ -52,31 +52,33 @@ const localUserService = {
     hireDeveloper(developer, currentUserID) {
         const users = JSON.parse(localStorage.getItem('users'));
         const currentUser = users.find(user => user.id === currentUserID)
+        const currIndex = users.findIndex(user => user.id === currentUserID)
         currentUser.hiredDevelopers.push(developer);
+        users.splice(currIndex, 0, currentUser)
+        localStorage.setItem('users', JSON.stringify(users))
     },
 
-    hireManyDevelopers(developers, currentUserID) {
+    hireManyDevelopers(developers) {
         const users = JSON.parse(localStorage.getItem('users'));
-        const currentUser = users.find(user => user.id === currentUserID)
+        let currUserID = this.getUserID()
         developers.forEach(dev => {
+            const currentUser = users.find(user => user.id === currUserID)
+            const currIndex = users.findIndex(user => user.id === currUserID)
             currentUser.hiredDevelopers.push(dev)
-            localStorage.setItem('users', JSON.stringify(currentUser))
-        })        
+            users.splice(currIndex, 0, currentUser)
+            localStorage.setItem('users', JSON.stringify(users))
+        })
     },
 
-    getHiredDevelopers(currentUserID) {
+    getHiredDevelopers() {
         const users = JSON.parse(localStorage.getItem('users'));
-        const currentUser = users.find(user => user.id === currentUserID)
-        return currentUser.hiredDevelopers;
+        let currUserID = this.getUserID()
+        const currentUser = users.find(user => user.id === currUserID)
+        if (currentUser) {
+            return currentUser.hiredDevelopers;
+        }
+        return null
     },
 }
 
-export default localUserService 
-
-// user = {
-//     id: '9213841',
-//     name: 'Ivan',
-//     password: '123',
-//     hiredDevelopers: [{id: 123, name: 'Tosho the Dev'}, 
-//         {id: 321, name: 'Koko', hiredFrom: '22.06.2021', hiredUntil: '01.09.2021'}]
-// }
+export default localUserService
